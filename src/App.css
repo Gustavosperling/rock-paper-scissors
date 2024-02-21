@@ -1,0 +1,1271 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+  font-family: 'Barlow Semi Condensed';
+  overflow: hidden;
+}
+
+.rules-button {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 15px;
+  border: 3px solid;
+  border-color: hsl(217, 16%, 45%);
+  font-size: x-large;
+  background: none;
+  font-weight: 300;
+  color: hsl(0, 0%, 69%);
+  cursor: pointer;
+}
+
+.rules-button:hover {
+  color: hsl(0, 0%, 85%);
+  border-color: hsl(218, 14%, 70%);
+}
+
+.rules-button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.game-container {
+  border-radius: 25px;
+  border: 4px solid;
+  border-color: hsl(217, 16%, 45%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-top: 60px;
+  margin-right: 25%;
+  margin-bottom: 60px;
+  margin-left: 25%;
+}
+
+.score {
+  border-radius: 20px;
+  background-color: hsl(0, 0%, 81%);
+  padding: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.score-value {
+  text-align: center;
+  color: hsl(229, 25%, 31%);
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.score-label {
+  font-size: 15px;
+  color: hsl(229, 64%, 46%);
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.game-images {
+  position: relative;
+  left: auto;
+  right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8%;
+}
+
+.paper {
+  position: relative;
+  bottom: 130px;
+  left: 40px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(230, 89%, 62%);
+  cursor: pointer;
+}
+
+.scissor {
+  position: relative;
+  bottom: 130px;
+  right: 40px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(39, 89%, 49%);
+  cursor: pointer;
+}
+
+.rock {
+  position: relative;
+  top: 120px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(349, 71%, 52%);
+  cursor: pointer;
+}
+
+.triangle {
+  position: relative;
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.paper:hover {
+  background-color: hsl(0, 0%, 90%);
+  border-color: hsl(230, 89%, 65%);
+}
+
+.rock:hover {
+  background-color: hsl(0, 0%, 90%);
+  border-color: hsl(349, 70%, 56%);
+}
+
+.scissor:hover {
+  background-color: hsl(0, 0%, 90%);
+  border-color: hsl(40, 84%, 53%);
+}
+
+.paper:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.rock:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.scissor:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#pop-up-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .9);
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+}
+
+#pop-up-image span {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 50px;
+  font-weight: bolder;
+  color: #b4b4b448;
+  cursor: pointer;
+  z-index: 100;
+}
+
+#pop-up-image h2 {
+  position: absolute;
+  font-family: 'Barlow Semi Condensed';
+  top: 5%;
+  font-size: 30px;
+  font-weight: bold;
+  color: #585858da;
+  z-index: 100;
+}
+
+.rules-window {
+  position: absolute;
+  font-family: 'Barlow Semi Condensed';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #fff;
+  background-color: #fff;
+  border-radius: 5px;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 1%;
+  padding-top: 5%;
+  z-index: 100;
+  object-fit: cover;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+#hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.3s, opacity 0.3s linear;
+}
+
+#visible {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+.paper-big {
+  position: fixed;
+  top: 50%;
+  right: 60%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(230, 89%, 62%);
+  transform: scale(1.4);
+  transition: transform 0.3s linear;
+  z-index: 2;
+}
+
+.rock-big {
+  position: fixed;
+  top: 50%;
+  right: 60%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(349, 71%, 52%);
+  transform: scale(1.4);
+  transition: transform 0.3s linear;
+  z-index: 2;
+}
+
+.scissor-big {
+  position: fixed;
+  top: 50%;
+  right: 60%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(39, 89%, 49%);
+  transform: scale(1.4);
+  transition: transform 0.3s linear;
+  z-index: 2;
+}
+
+#you-picked {
+  display: none;
+  position: fixed;
+  font-size: xx-large;
+  top: 35%;
+  right: 61.7%;
+  color: hsl(0, 0%, 92%);
+  font-weight: 600;
+}
+
+#house-picked {
+  display: none;
+  position: fixed;
+  font-size: xx-large;
+  top: 35%;
+  left: 59.5%;
+  color: hsl(0, 0%, 92%);
+  font-weight: 600;
+}
+
+#house-paper {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(230, 89%, 62%);
+  transform: scale(1.4);
+  transition: transform 0.3s linear;
+  z-index: 2;
+}
+
+#house-rock {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(349, 71%, 52%);
+  transform: scale(1.4);
+  transition: transform 0.3s linear;
+  z-index: 2;
+}
+
+#house-scissor {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 81%);
+  border: 20px solid;
+  border-color: hsl(39, 89%, 49%);
+  transform: scale(1.4);
+  transition: transform 0.3s linear;
+  z-index: 2;
+}
+
+.dot {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  width: 190px;
+  height: 190px;
+  background-color: hsla(0, 0%, 0%, 0.171);
+  border-radius: 50%;
+}
+
+.play-again {
+  visibility: hidden;
+  position: fixed;
+  font-size: x-large;
+  bottom: 31%;
+  font-weight: 700;
+  border-radius: 8px;
+  background-color: hsl(0, 0%, 81%);
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 0.3%;
+  padding-top: 0.3%;
+  border: 5px solid hsl(0, 0%, 81%);
+  cursor: pointer;
+  font-family: 'Barlow Semi Condensed';
+  color: hsl(230, 73%, 26%);
+}
+
+.play-again:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.play-again:hover {
+  background-color: hsl(0, 0%, 87%);
+  color: hsl(230, 76%, 33%);
+  border: 5px solid hsl(0, 0%, 87%);
+}
+
+#you-win {
+  visibility: hidden;
+  position: fixed;
+  bottom: 40%;
+  font-size: 70px;
+  color: hsl(0, 0%, 96%);
+}
+
+#you-lose {
+  visibility: hidden;
+  position: fixed;
+  bottom: 40%;
+  font-size: 70px;
+  color: hsl(0, 0%, 96%);
+}
+
+#tie {
+  visibility: hidden;
+  position: fixed;
+  bottom: 40%;
+  font-size: 70px;
+  color: hsl(0, 0%, 96%);
+}
+
+.dot-house-winner {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  left: 60%;
+  width: 190px;
+  height: 190px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.212) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  transform: scale(3.3);
+  z-index: 0;
+}
+
+.dot-player-winner {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  right: 60%;
+  width: 190px;
+  height: 190px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.212) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  transform: scale(3.3);
+  z-index: 0;
+}
+
+/* Adjustment for small screen */
+@media only screen and (max-width: 1300px) {
+  .paper {
+    position: relative;
+    transform: scale(0.7);
+    bottom: 100px;
+    left: 80px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(230, 89%, 62%);
+    cursor: pointer;
+  }
+
+  .scissor {
+    position: relative;
+    transform: scale(0.7);
+    bottom: 100px;
+    right: 80px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(39, 89%, 49%);
+    cursor: pointer;
+  }
+  
+  .rock {
+    position: relative;
+    transform: scale(0.7);
+    top: 90px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(349, 71%, 52%);
+    cursor: pointer;
+  }
+  
+  .triangle {
+    position: relative;
+    transform: scale(0.7);
+  }
+
+  .game-container {
+    transform: scale(0.9);
+    border-radius: 25px;
+    border: 4px solid;
+    border-color: hsl(217, 16%, 45%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-top: 60px;
+    margin-right: 15%;
+    margin-bottom: 60px;
+    margin-left: 15%;
+  }
+
+  .rules-button {
+    position: absolute;
+    transform: scale(0.7);
+    bottom: 25px;
+    right: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 15px;
+    border: 3px solid;
+    border-color: hsl(217, 16%, 45%);
+    font-size: x-large;
+    background: none;
+    font-weight: 300;
+    color: hsl(0, 0%, 69%);
+    cursor: pointer;
+  }
+
+  .paper-big {
+    position: fixed;
+    top: 50%;
+    right: 60%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(230, 89%, 62%);
+    transform: scale(1.1);
+    transition: transform 0.3s linear;
+    z-index: 2;
+  }
+  
+  .rock-big {
+    position: fixed;
+    transform: scale(0.7);
+    top: 50%;
+    right: 60%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(349, 71%, 52%);
+    transform: scale(1.1);
+    transition: transform 0.3s linear;
+    z-index: 2;
+  }
+  
+  .scissor-big {
+    position: fixed;
+    transform: scale(0.7);
+    top: 50%;
+    right: 60%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(39, 89%, 49%);
+    transform: scale(1.1);
+    transition: transform 0.3s linear;
+    z-index: 2;
+  }
+  
+  #you-picked {
+    display: none;
+    transform: scale(0.7);
+    position: fixed;
+    font-size: xx-large;
+    top: 35%;
+    right: 63%;
+    color: hsl(0, 0%, 92%);
+    font-weight: 600;
+  }
+  
+  #house-picked {
+    display: none;
+    transform: scale(0.7);
+    position: fixed;
+    font-size: xx-large;
+    top: 35%;
+    left: 59.5%;
+    color: hsl(0, 0%, 92%);
+    font-weight: 600;
+  }
+  
+  #house-paper {
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(230, 89%, 62%);
+    transform: scale(1.1);
+    transition: transform 0.3s linear;
+    z-index: 2;
+  }
+  
+  #house-rock {
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(349, 71%, 52%);
+    transform: scale(1.1);
+    transition: transform 0.3s linear;
+    z-index: 2;
+  }
+  
+  #house-scissor {
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 81%);
+    border: 20px solid;
+    border-color: hsl(39, 89%, 49%);
+    transform: scale(1.1);
+    transition: transform 0.3s linear;
+    z-index: 2;
+  }
+  
+  .dot {
+    visibility: hidden;
+    transform: scale(0.7);
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    width: 190px;
+    height: 190px;
+    background-color: hsla(0, 0%, 0%, 0.171);
+    border-radius: 50%;
+  }
+  
+  .play-again {
+    visibility: hidden;
+    transform: scale(0.7);
+    position: fixed;
+    font-size: x-large;
+    bottom: 31%;
+    font-weight: 700;
+    border-radius: 8px;
+    background-color: hsl(0, 0%, 81%);
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 0.3%;
+    padding-top: 0.3%;
+    border: 5px solid hsl(0, 0%, 81%);
+    cursor: pointer;
+    font-family: 'Barlow Semi Condensed';
+    color: hsl(230, 73%, 26%);
+  }
+
+  #you-win {
+    visibility: hidden;
+    transform: scale(0.7);
+    position: fixed;
+    bottom: 40%;
+    font-size: 70px;
+    color: hsl(0, 0%, 96%);
+  }
+  
+  #you-lose {
+    visibility: hidden;
+    transform: scale(0.7);
+    position: fixed;
+    bottom: 40%;
+    font-size: 70px;
+    color: hsl(0, 0%, 96%);
+  }
+  
+  #tie {
+    visibility: hidden;
+    transform: scale(0.7);
+    position: fixed;
+    bottom: 40%;
+    font-size: 70px;
+    color: hsl(0, 0%, 96%);
+  }
+  .rules-window {
+    position: absolute;
+    font-family: 'Barlow Semi Condensed';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #fff;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 1%;
+    padding-top: 8%;
+    z-index: 100;
+    object-fit: cover;
+  }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .paper {
+      position: relative;
+      transform: scale(0.5);
+      bottom: 80px;
+      left: 110px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(230, 89%, 62%);
+      cursor: pointer;
+    }
+  
+    .scissor {
+      position: relative;
+      transform: scale(0.5);
+      bottom: 80px;
+      right: 110px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(39, 89%, 49%);
+      cursor: pointer;
+    }
+    
+    .rock {
+      position: relative;
+      transform: scale(0.5);
+      top: 70px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(349, 71%, 52%);
+      cursor: pointer;
+    }
+    
+    .triangle {
+      position: relative;
+      transform: scale(0.5);
+    }
+  
+    .game-container {
+      transform: scale(0.7);
+      border-radius: 25px;
+      border: 4px solid;
+      border-color: hsl(217, 16%, 45%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      margin-top: 60px;
+      margin-right: 3%;
+      margin-bottom: 60px;
+      margin-left: 3%;
+    }
+  
+    .rules-button {
+      position: absolute;
+      transform: scale(0.7);
+      bottom: 25px;
+      right: 25px;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border-radius: 15px;
+      border: 3px solid;
+      border-color: hsl(217, 16%, 45%);
+      font-size: x-large;
+      background: none;
+      font-weight: 300;
+      color: hsl(0, 0%, 69%);
+      cursor: pointer;
+    }
+  
+    .paper-big {
+      position: fixed;
+      top: 50%;
+      right: 60%;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(230, 89%, 62%);
+      transform: scale(0.9);
+      transition: transform 0.3s linear;
+      z-index: 2;
+    }
+    
+    .rock-big {
+      position: fixed;
+      top: 50%;
+      right: 60%;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(349, 71%, 52%);
+      transform: scale(0.9);
+      transition: transform 0.3s linear;
+      z-index: 2;
+    }
+    
+    .scissor-big {
+      position: fixed;
+      top: 50%;
+      right: 60%;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(39, 89%, 49%);
+      transform: scale(0.9);
+      transition: transform 0.3s linear;
+      z-index: 2;
+    }
+    
+    #you-picked {
+      display: none;
+      transform: scale(0.7);
+      position: fixed;
+      font-size: xx-large;
+      top: 35%;
+      right: 64.5%;
+      color: hsl(0, 0%, 92%);
+      font-weight: 600;
+    }
+    
+    #house-picked {
+      display: none;
+      transform: scale(0.7);
+      position: fixed;
+      font-size: xx-large;
+      top: 35%;
+      left: 59.5%;
+      color: hsl(0, 0%, 92%);
+      font-weight: 600;
+    }
+    
+    #house-paper {
+      visibility: hidden;
+      position: fixed;
+      top: 50%;
+      left: 60%;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(230, 89%, 62%);
+      transform: scale(0.9);
+      transition: transform 0.3s linear;
+      z-index: 2;
+    }
+    
+    #house-rock {
+      visibility: hidden;
+      position: fixed;
+      top: 50%;
+      left: 60%;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(349, 71%, 52%);
+      transform: scale(0.9);
+      transition: transform 0.3s linear;
+      z-index: 2;
+    }
+    
+    #house-scissor {
+      visibility: hidden;
+      position: fixed;
+      top: 50%;
+      left: 60%;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 81%);
+      border: 20px solid;
+      border-color: hsl(39, 89%, 49%);
+      transform: scale(0.9);
+      transition: transform 0.3s linear;
+      z-index: 2;
+    }
+    
+    .dot {
+      visibility: hidden;
+      transform: scale(0.5);
+      position: fixed;
+      top: 50%;
+      left: 60%;
+      width: 190px;
+      height: 190px;
+      background-color: hsla(0, 0%, 0%, 0.171);
+      border-radius: 50%;
+    }
+    
+    .play-again {
+      visibility: hidden;
+      transform: scale(0.7);
+      position: fixed;
+      font-size: x-large;
+      bottom: 31%;
+      font-weight: 700;
+      border-radius: 8px;
+      background-color: hsl(0, 0%, 81%);
+      padding-left: 3%;
+      padding-right: 3%;
+      padding-bottom: 0.3%;
+      padding-top: 0.3%;
+      border: 5px solid hsl(0, 0%, 81%);
+      cursor: pointer;
+      font-family: 'Barlow Semi Condensed';
+      color: hsl(230, 73%, 26%);
+    }
+  
+    #you-win {
+      visibility: hidden;
+      transform: scale(0.5);
+      position: fixed;
+      bottom: 40%;
+      font-size: 70px;
+      color: hsl(0, 0%, 96%);
+    }
+    
+    #you-lose {
+      visibility: hidden;
+      transform: scale(0.5);
+      position: fixed;
+      bottom: 40%;
+      font-size: 70px;
+      color: hsl(0, 0%, 96%);
+    }
+    
+    #tie {
+      visibility: hidden;
+      transform: scale(0.5);
+      position: fixed;
+      bottom: 40%;
+      font-size: 70px;
+      color: hsl(0, 0%, 96%);
+    }
+    .rules-window {
+      position: absolute;
+      font-family: 'Barlow Semi Condensed';
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 5px solid #fff;
+      background-color: #fff;
+      border-radius: 5px;
+      padding-left: 3%;
+      padding-right: 3%;
+      padding-bottom: 1%;
+      padding-top: 11%;
+      z-index: 100;
+      object-fit: cover;
+    }
+    }
+
+    @media only screen and (max-width: 550px) {
+      .paper {
+        position: relative;
+        transform: scale(0.5);
+        bottom: 80px;
+        left: 110px;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(230, 89%, 62%);
+        cursor: pointer;
+      }
+    
+      .scissor {
+        position: relative;
+        transform: scale(0.5);
+        bottom: 80px;
+        right: 110px;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(39, 89%, 49%);
+        cursor: pointer;
+      }
+      
+      .rock {
+        position: relative;
+        transform: scale(0.5);
+        top: 70px;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(349, 71%, 52%);
+        cursor: pointer;
+      }
+      
+      .triangle {
+        position: relative;
+        transform: scale(0.5);
+      }
+    
+      .game-container {
+        transform: scale(0.85);
+        border-radius: 25px;
+        border: 4px solid;
+        border-color: hsl(217, 16%, 45%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      .rules-button {
+        position: fixed;
+        transform: translateX(-50%) scale(0.55);
+        bottom: 25px;
+        right: unset;
+        left: unset;
+        left: 50%;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-radius: 15px;
+        border: 3px solid;
+        border-color: hsl(217, 16%, 45%);
+        font-size: x-large;
+        background: none;
+        font-weight: 300;
+        color: hsl(0, 0%, 69%);
+        cursor: pointer;
+      }
+    
+      .paper-big {
+        position: fixed;
+        top: 38%;
+        right: 46%;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(230, 89%, 62%);
+        transform: scale(0.6);
+        transition: transform 0.3s linear;
+        z-index: 2;
+      }
+      
+      .rock-big {
+        position: fixed;
+        top: 38%;
+        right: 46%;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(349, 71%, 52%);
+        transform: scale(0.6);
+        transition: transform 0.3s linear;
+        z-index: 2;
+      }
+      
+      .scissor-big {
+        position: fixed;
+        top: 38%;
+        right: 46%;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(39, 89%, 49%);
+        transform: scale(0.6);
+        transition: transform 0.3s linear;
+        z-index: 2;
+      }
+      
+      #you-picked {
+        display: none;
+        transform: scale(0.5);
+        position: fixed;
+        font-size: xx-large;
+        top: 35%;
+        right: 55%;
+        color: hsl(0, 0%, 92%);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      
+      #house-picked {
+        display: none;
+        transform: scale(0.5);
+        position: fixed;
+        font-size: xx-large;
+        top: 35%;
+        left: 40%;
+        color: hsl(0, 0%, 92%);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      
+      #house-paper {
+        visibility: hidden;
+        position: fixed;
+        top: 38%;
+        left: 46%;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(230, 89%, 62%);
+        transform: scale(0.6);
+        transition: transform 0.3s linear;
+        z-index: 2;
+      }
+      
+      #house-rock {
+        visibility: hidden;
+        position: fixed;
+        top: 38%;
+        left: 46%;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(349, 71%, 52%);
+        transform: scale(0.6);
+        transition: transform 0.3s linear;
+        z-index: 2;
+      }
+      
+      #house-scissor {
+        visibility: hidden;
+        position: fixed;
+        top: 38%;
+        left: 46%;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background-color: hsl(0, 0%, 81%);
+        border: 20px solid;
+        border-color: hsl(39, 89%, 49%);
+        transform: scale(0.6);
+        transition: transform 0.3s linear;
+        z-index: 2;
+      }
+      
+      .dot {
+        visibility: hidden;
+        transform: scale(0.5);
+        position: fixed;
+        top: 38%;
+        left: 46%;
+        width: 190px;
+        height: 190px;
+        background-color: hsla(0, 0%, 0%, 0.171);
+        border-radius: 50%;
+      }
+      
+      .play-again {
+        visibility: hidden;
+        transform: scale(1.1);
+        position: fixed;
+        font-size: x-large;
+        bottom: 17%;
+        font-weight: 700;
+        border-radius: 8px;
+        background-color: hsl(0, 0%, 81%);
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-bottom: 0.3%;
+        padding-top: 0.3%;
+        border: 5px solid hsl(0, 0%, 81%);
+        cursor: pointer;
+        font-family: 'Barlow Semi Condensed';
+        color: hsl(230, 73%, 26%);
+      }
+    
+      #you-win {
+        visibility: hidden;
+        transform: scale(0.7);
+        position: fixed;
+        bottom: 25%;
+        font-size: 70px;
+        color: hsl(0, 0%, 96%);
+      }
+      
+      #you-lose {
+        visibility: hidden;
+        transform: scale(0.7);
+        position: fixed;
+        bottom: 25%;
+        font-size: 70px;
+        color: hsl(0, 0%, 96%);
+      }
+      
+      #tie {
+        visibility: hidden;
+        transform: scale(0.7);
+        position: fixed;
+        bottom: 25%;
+        font-size: 70px;
+        color: hsl(0, 0%, 96%);
+      }
+
+      .rules-window {
+        position: absolute;
+        font-family: 'Barlow Semi Condensed';
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+        border: 5px solid #fff;
+        background-color: #fff;
+        border-radius: 5px;
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-bottom: 1%;
+        padding-top: 20%;
+        z-index: 100;
+        object-fit: cover;
+      }
+
+      .dot-house-winner {
+        top: 38%;
+        left: 46%;
+        transform: scale(2.3);
+      }
+      
+      .dot-player-winner {
+        top: 38%;
+        right: 46%;
+        transform: scale(2.3);
+      }
+      }
